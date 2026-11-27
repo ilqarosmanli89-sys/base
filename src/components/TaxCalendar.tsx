@@ -18,7 +18,7 @@ function groupByMonth(list: Deadline[]) {
   return months;
 }
 
-export function TaxCalendar({ today, limit }: { today: string; limit?: number }) {
+export function TaxCalendar({ today, limit, compact }: { today: string; limit?: number; compact?: boolean }) {
   const [regime, setRegime] = useState<Regime>("vat");
   const [excise, setExcise] = useState(false);
   let list = deadlines(today, { regime, excise });
@@ -28,20 +28,7 @@ export function TaxCalendar({ today, limit }: { today: string; limit?: number })
   }
   const soonLimit = new Date(Date.parse(today) + 14 * 864e5).toISOString().slice(0, 10);
 
-  return (
-    <div className="grid">
-      <form className="panel" onSubmit={(e) => e.preventDefault()}>
-        <div className="f"><label htmlFor="regime">Vergi rejimi</label>
-          <select id="regime" value={regime} onChange={(e) => setRegime(e.target.value as Regime)}>
-            <option value="vat">ƏDV və mənfəət vergisi ödəyicisi</option>
-            <option value="simplified">Sadələşdirilmiş vergi ödəyicisi</option>
-          </select></div>
-        <div className="f"><label htmlFor="excise">Aksizli mal istehsal edir</label>
-          <select id="excise" value={excise ? "1" : "0"} onChange={(e) => setExcise(e.target.value === "1")}>
-            <option value="0">Xeyr</option><option value="1">Bəli</option>
-          </select></div>
-        <p className="hint">Tarix istirahət gününə düşəndə köçürülmə qaydası hələ tətbiq edilmir.</p>
-      </form>
+  const listing = (
       <div>
         {[...groupByMonth(list)].map(([month, days]) => (
           <div key={month}>
@@ -60,6 +47,23 @@ export function TaxCalendar({ today, limit }: { today: string; limit?: number })
           </div>
         ))}
       </div>
+  );
+  if (compact) return listing;
+  return (
+    <div className="grid">
+      <form className="panel" onSubmit={(e) => e.preventDefault()}>
+        <div className="f"><label htmlFor="regime">Vergi rejimi</label>
+          <select id="regime" value={regime} onChange={(e) => setRegime(e.target.value as Regime)}>
+            <option value="vat">ƏDV və mənfəət vergisi ödəyicisi</option>
+            <option value="simplified">Sadələşdirilmiş vergi ödəyicisi</option>
+          </select></div>
+        <div className="f"><label htmlFor="excise">Aksizli mal istehsal edir</label>
+          <select id="excise" value={excise ? "1" : "0"} onChange={(e) => setExcise(e.target.value === "1")}>
+            <option value="0">Xeyr</option><option value="1">Bəli</option>
+          </select></div>
+        <p className="hint">Tarix istirahət gününə düşəndə köçürülmə qaydası hələ tətbiq edilmir.</p>
+      </form>
+      {listing}
     </div>
   );
 }

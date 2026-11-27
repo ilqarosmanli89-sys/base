@@ -15,14 +15,6 @@
 * { box-sizing: border-box; min-width: 0; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; overflow-x: clip; }
 a { color: inherit; }
-.band { padding-block: clamp(20px, 3vw, 40px); padding-inline: max(5vw, 16px); }
-.wrap { max-width: 1240px; margin: 0 auto; }
-.top { background: var(--mist); padding-bottom: 0; }
-.brand { font-weight: 600; font-size: 20px; text-decoration: none; letter-spacing: -0.01em; }
-.nav { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; }
-.nav a { text-decoration: none; color: var(--mute); padding: 12px 16px; border-radius: 8px 8px 0 0; font-weight: 500; font-size: 15px; }
-.nav a:hover { color: var(--ink); }
-.nav a[aria-current="page"] { background: var(--bg); color: var(--ink); }
 h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 8px; }
 h2 { font-size: 20px; margin: 0 0 12px; }
 .sub { color: var(--mute); margin: 0 0 24px; max-width: 70ch; }
@@ -62,3 +54,44 @@ tr.tot td { font-weight: 600; border-bottom: 2px solid var(--ink); }
 .cal .d small { display: block; font-weight: 400; font-size: 13px; color: var(--mute); }
 .cal .soon { background: var(--mist); border-radius: 6px; padding-inline: 10px; }
 .month { font-weight: 600; color: var(--green); margin: 22px 0 0; }
+
+.shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100vh; }
+.side { background: var(--mist); border-right: 1px solid var(--line); padding: 20px 12px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.side-top { display: flex; align-items: center; justify-content: space-between; padding: 0 8px 12px; }
+.brand { font-weight: 600; font-size: 20px; text-decoration: none; letter-spacing: -0.01em; }
+.menu-btn { display: none; font: inherit; font-size: 15px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 8px; padding: 8px 14px; min-height: 44px; cursor: pointer; }
+.grp { margin-bottom: 10px; }
+.grp-h { font-size: 13px; font-weight: 600; color: var(--mute); padding: 8px 8px 2px; }
+.side nav a { display: block; text-decoration: none; padding: 7px 8px; border-radius: 6px; font-size: 15px; }
+.side nav a:hover { background: color-mix(in srgb, var(--green) 10%, transparent); }
+.side nav a[aria-current="page"] { background: var(--bg); font-weight: 600; box-shadow: inset 3px 0 0 var(--green); }
+.side nav a.soon { color: var(--mute); }
+.side nav a small { font-size: 12px; }
+.content { padding: clamp(20px, 3vw, 40px) max(4vw, 16px); max-width: 1240px; width: 100%; }
+@media (max-width: 860px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .side { position: static; height: auto; padding: 12px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .side-top { padding-bottom: 0; }
+  .menu-btn { display: block; }
+  .side nav { display: none; padding-top: 12px; }
+  .side nav.open { display: block; }
+}
+.head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 20px; }
+.head h1 { margin: 0; }
+.head .sub { margin: 4px 0 0; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-weight: 500; font-size: 15px; border: 0; border-radius: 8px; padding: 10px 16px; min-height: 44px; background: var(--green); color: #fff; text-decoration: none; cursor: pointer; white-space: nowrap; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn:disabled { opacity: 0.6; cursor: default; }
+.error { color: #c0392b; background: color-mix(in srgb, #c0392b 10%, transparent); padding: 10px 12px; border-radius: 8px; margin-bottom: 14px; }
+.form2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(14em, 1fr)); gap: 0 20px; max-width: 760px; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.empty { color: var(--mute); padding: 24px 0; }
+.badge { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--line); color: var(--mute); white-space: nowrap; }
+.badge.ok { background: color-mix(in srgb, var(--green) 15%, transparent); color: var(--green); }
+.neg { color: #c0392b; }
+td a { font-weight: 500; }
+.lines td { vertical-align: middle; }
+.lines input, .lines select { padding: 8px; }
+.x { background: none; border: 0; color: var(--mute); font-size: 20px; cursor: pointer; min-width: 36px; min-height: 36px; }
+@media (max-width: 600px) { table { font-size: 13px; } th, td { padding: 6px 4px; } }
+.kpis.wide { grid-template-columns: repeat(auto-fit, minmax(13em, 1fr)); }

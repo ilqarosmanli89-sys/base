@@ -1,6 +1,6 @@
 import { SeveranceCalculator } from "@/components/SeveranceCalculator";
 
-export const metadata = { title: "İşdən çıxma · Mühasibat və vergi" };
+export const metadata = { title: "İşdən çıxma · Mühasibat" };
 
 export default function Page() {
   return (

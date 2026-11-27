@@ -1,6 +1,6 @@
 import { VacationCalculator } from "@/components/VacationCalculator";
 
-export const metadata = { title: "Məzuniyyət haqqı · Mühasibat və vergi" };
+export const metadata = { title: "Məzuniyyət haqqı · Mühasibat" };
 
 export default function Page() {
   return (
